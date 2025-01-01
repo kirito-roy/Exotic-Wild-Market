@@ -1,14 +1,37 @@
-<div class=" p-0 " [style]="{'background-color': 'white','width': '80vw','height':'80vh','margin-top':'10vh','margin-left':'10vw'}" >
-  <div style="height: 60vh;">
-    <h1 class="ml-10">{{msg}}</h1>
-    </div>
+<div
+  class="p-0"
+  [style]="{
+    'background-color': 'white',
+    width: '80vw',
+    height: '80vh',
+    'margin-top': '10vh',
+    'margin-left': '10vw'
+  }"
+>
+  <div style="height: 60vh">
+    <h1 class="ml-10">{{ msg }} by kirito </h1>
+  </div>
 
- <div class="" style="height: 10vh; text-align: center;" >
-  <button pButton pRipple type="button" (click)="yes()" label="Yes" class="p-button-raised p-button-success p-button-text m-2"></button>
+  <div class="" style="height: 10vh; text-align: center">
+    <button
+      pButton
+      pRipple
+      type="button"
+      (click)="yes()"
+      label="Yes"
+      class="p-button-raised p-button-success p-button-text m-2"
+    ></button>
 
-  <button pButton pRipple type="button" label="No"  id="no" (mouseenter)="entered()" (click)="beat()" class="p-button-raised p-button-danger p-button-text m-2"></button>
-</div>
-<p></p>
-
-
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="No"
+      id="no"
+      (mouseenter)="entered()"
+      (click)="beat()"
+      class="p-button-raised p-button-danger p-button-text m-2"
+    ></button>
+  </div>
+  <p></p>
 </div>
