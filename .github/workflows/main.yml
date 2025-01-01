@@ -28,6 +28,7 @@ jobs:
       run: npm run build -- --configuration production --output-path=dist  # Corrected build command
     - name: change path 
       run: |
+            cd dist
             sed -i 's|src="runtime\.|src="https://kirito-roy.github.io/angular/runtime.|g' index.html
             sed -i 's|src="polyfills\.|src="https://kirito-roy.github.io/angular/polyfills.|g' index.html
             sed -i 's|src="main\.|src="https://kirito-roy.github.io/angular/main.|g' index.html
