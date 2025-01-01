@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write  # Add this line to ensure the GITHUB_TOKEN has write permissions
+      contents: write  # Ensure the GITHUB_TOKEN has write permissions
 
     steps:
     - name: Checkout repository
@@ -32,3 +32,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist  # Adjust this to your build output directory
+        publish_branch: gh-pages  # Ensure the gh-pages branch is used for deployment
+        force_orphan: true  # Ensure a clean gh-pages branch is created if it doesn't exist
