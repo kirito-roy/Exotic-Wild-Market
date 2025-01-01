@@ -26,6 +26,13 @@ jobs:
 
     - name: Build Angular project
       run: npm run build -- --configuration production --output-path=dist  # Corrected build command
+    - name: change path 
+      run: |
+            sed -i 's|src="runtime\.|src="https://kirito-roy.github.io/angular/runtime.|g' index.html
+            sed -i 's|src="polyfills\.|src="https://kirito-roy.github.io/angular/polyfills.|g' index.html
+            sed -i 's|src="main\.|src="https://kirito-roy.github.io/angular/main.|g' index.html
+            sed -i 's|href="styles\.|href="https://kirito-roy.github.io/angular/styles.|g' index.html
+
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
@@ -34,4 +41,3 @@ jobs:
         publish_dir: ./dist  # Adjust this to your build output directory
         publish_branch: gh-pages  # Ensure the gh-pages branch is used for deployment
         force_orphan: true  # Ensure a clean gh-pages branch is created if it doesn't exist
-        
