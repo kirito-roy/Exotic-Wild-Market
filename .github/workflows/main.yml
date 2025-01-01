@@ -34,3 +34,4 @@ jobs:
         publish_dir: ./dist  # Adjust this to your build output directory
         publish_branch: gh-pages  # Ensure the gh-pages branch is used for deployment
         force_orphan: true  # Ensure a clean gh-pages branch is created if it doesn't exist
+        
