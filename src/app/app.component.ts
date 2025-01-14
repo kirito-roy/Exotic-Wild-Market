@@ -7,7 +7,7 @@ import { Msg } from './service/msg/msg.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'shopping';
+  title = 'Exotic-Wild-Market';
   msg = 'Are you gay?';
 
   height!: number;
