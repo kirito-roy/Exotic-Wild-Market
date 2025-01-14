@@ -16,6 +16,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
+import { NbThemeModule } from '@nebular/theme';
 
 
 
@@ -38,6 +39,7 @@ import {DialogModule} from 'primeng/dialog';
     ConfirmDialogModule,
     ToastModule,
     DialogModule,
+    NbThemeModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
