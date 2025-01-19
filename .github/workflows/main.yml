@@ -1,44 +1,44 @@
-name: Deploy Angular to GitHub Pages
+#name: Deploy Angular to GitHub Pages
 
-on:
-  push:
-    branches:
-      - main  # Change this to your default branch if it's not 'main'
+#on:
+#  push:
+#    branches:
+#      - main  # Change this to your default branch if it's not 'main'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
 
-    permissions:
-      contents: write  # Ensure the GITHUB_TOKEN has write permissions
+#    permissions:
+#      contents: write  # Ensure the GITHUB_TOKEN has write permissions
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v2
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'  # Specify the Node.js version
+#    - name: Setup Node.js environment
+#      uses: actions/setup-node@v2
+#      with:
+#        node-version: '14'  # Specify the Node.js version
 
-    - name: Install dependencies
-      run: npm install
+#    - name: Install dependencies
+#      run: npm install
+#
+#    - name: Build Angular project
+#      run: npm run build -- --configuration production --output-path=dist  # Corrected build command
+#    - name: change path 
+#      run: |
+#            cd dist
+#            sed -i 's|src="runtime\.|src="https://kirito-roy.github.io/angular/runtime.|g' index.html
+#            sed -i 's|src="polyfills\.|src="https://kirito-roy.github.io/angular/polyfills.|g' index.html
+#            sed -i 's|src="main\.|src="https://kirito-roy.github.io/angular/main.|g' index.html
+#            sed -i 's|href="styles\.|href="https://kirito-roy.github.io/angular/styles.|g' index.html
 
-    - name: Build Angular project
-      run: npm run build -- --configuration production --output-path=dist  # Corrected build command
-    - name: change path 
-      run: |
-            cd dist
-            sed -i 's|src="runtime\.|src="https://kirito-roy.github.io/angular/runtime.|g' index.html
-            sed -i 's|src="polyfills\.|src="https://kirito-roy.github.io/angular/polyfills.|g' index.html
-            sed -i 's|src="main\.|src="https://kirito-roy.github.io/angular/main.|g' index.html
-            sed -i 's|href="styles\.|href="https://kirito-roy.github.io/angular/styles.|g' index.html
 
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist  # Adjust this to your build output directory
-        publish_branch: gh-pages  # Ensure the gh-pages branch is used for deployment
-        force_orphan: true  # Ensure a clean gh-pages branch is created if it doesn't exist
+#    - name: Deploy to GitHub Pages
+#      uses: peaceiris/actions-gh-pages@v3
+#      with:
+#        github_token: ${{ secrets.GITHUB_TOKEN }}
+#        publish_dir: ./dist  # Adjust this to your build output directory
+#        publish_branch: gh-pages  # Ensure the gh-pages branch is used for deployment
+#        force_orphan: true  # Ensure a clean gh-pages branch is created if it doesn't exist
