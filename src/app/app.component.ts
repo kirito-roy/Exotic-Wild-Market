@@ -1,52 +1,65 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Msg } from './service/msg/msg.service';
+import { firstValueFrom } from 'rxjs';
+import { Test1Service } from './service/apis/test1.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Exotic-Wild-Market';
-  msg = 'Are you gay?';
+  studentForm: FormGroup; // No longer optional
+  // enter some student data
 
-  height!: number;
-  width!: number;
+  students: any[] = [];
+  classes: any[] = [
+    { label: 'Class 1', value: 'c1' },
+    { label: 'Class 2', value: 'c2' },
+    { label: 'Class 3', value: 'c3' },
+    { label: 'Class 4', value: 'c4' },
+    { label: 'Class 5', value: 'c5' },
+    { label: 'Class 6', value: 'c6' },
+    { label: 'Class 7', value: 'c7' },
+    { label: 'Class 8', value: 'c8' },
+    { label: 'Class 9', value: 'c9' },
+    { label: 'Class 10', value: 'c10' },
+    { label: 'Class 11', value: 'c11' },
+    { label: 'Class 12', value: 'c12' },
 
-  constructor(private msgService: Msg) {
-    this.height = screen.height;
-    this.width = screen.width;
+  ];
+
+  constructor(private msgService: Msg, private fb: FormBuilder , private api :Test1Service) {
+    // Initialize the FormGroup to avoid undefined
+    this.studentForm = this.fb.group({
+      name: ['', Validators.required],
+      roll: ['', Validators.required],
+      // create phone number pattern
+      phoneNumber: ['', [Validators.required,Validators.maxLength(10),Validators.minLength(10),Validators.pattern('^[0-9]*$')]],
+      className: ['', Validators.required],
+    });
   }
 
-  yes() {
-    this.msgService.showWarning('Really!!!!!');
-    this.msg = 'You are Gay';
+  async ngOnInit(): Promise<void> {
+    this.showData(); // Add fetched student data to the list.
+  }
+  async showData(){
+    const responce = await firstValueFrom(this.api.getStudent());
+    // console.log(responce);
+    this.students=responce.data;
   }
 
-  entered() {
-    let no = document.getElementById('no') as HTMLButtonElement;
-    let random_y =
-      Math.floor(
-        Math.random() *
-          (this.height - (this.height / 10) * 3 - this.height / 10)
-      ) +
-      this.height / 10;
-    let random_x =
-      Math.floor(
-        Math.random() * (this.width - (this.width / 10) * 3 - this.width / 10)
-      ) +
-      this.width / 10;
-
-    const noId = no?.id;
-    if (noId) {
-      no.style.position = 'fixed';
-      no.style.top = random_y + 'px';
-      no.style.left = random_x + 'px';
+  async onSubmit(): Promise<void> {
+    if (this.studentForm.valid) {
+      const newStudent = this.studentForm.value;
+      // Here you would send the newStudent to your API
+      const res =await firstValueFrom( this.api.setStudent(newStudent));
+      this.msgService.showSuccess(res.message);
+      this.showData();
     } else {
-      console.error('No element with id "no" found');
+      this.msgService.showError('Please fill out all fields correctly');
     }
-  }
-  beat() {
-    this.msg = 'You Won!!!!!';
   }
 }

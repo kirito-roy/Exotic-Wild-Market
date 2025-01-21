@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
@@ -17,6 +16,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
 import { NbThemeModule } from '@nebular/theme';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -40,6 +41,8 @@ import { NbThemeModule } from '@nebular/theme';
     ToastModule,
     DialogModule,
     NbThemeModule.forRoot(),
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
