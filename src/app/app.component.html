@@ -7,16 +7,22 @@
     'margin-top': '5vh'
   }"
 >
-   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="grid gap-3">
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="grid gap-3">
     <div class="field col-12">
       <label for="name" class="block mb-2">Name:</label>
       <input
-        id="name" pInputText
+        id="name"
+        pInputText
         placeholder="Enter student name"
         formControlName="name"
         class="w-full"
+      />
+      <small
+        *ngIf="
+          studentForm?.get('name')?.invalid && studentForm?.get('name')?.touched
+        "
+        class="p-error"
       >
-      <small *ngIf="studentForm?.get('name')?.invalid && studentForm?.get('name')?.touched" class="p-error">
         Name is required.
       </small>
     </div>
@@ -24,24 +30,37 @@
     <div class="field col-12">
       <label for="roll" class="block mb-2">Roll:</label>
       <input
-        id="roll" pInputText
+        id="roll"
+        pInputText
         placeholder="Enter student roll number"
         formControlName="roll"
         class="w-full"
+      />
+      <small
+        *ngIf="
+          studentForm?.get('roll')?.invalid && studentForm?.get('roll')?.touched
+        "
+        class="p-error"
       >
-      <small *ngIf="studentForm?.get('roll')?.invalid && studentForm?.get('roll')?.touched" class="p-error">
         Roll is required.
       </small>
     </div>
     <div class="field col-12">
       <label for="number" class="block mb-2">Phone No.:</label>
-    <input
-        id="number" pInputText
+      <input
+        id="number"
+        pInputText
         placeholder="Enter student Phone No."
         formControlName="phoneNumber"
         class="w-full"
+      />
+      <small
+        *ngIf="
+          studentForm?.get('phoneNumber')?.invalid &&
+          studentForm?.get('phoneNumber')?.touched
+        "
+        class="p-error"
       >
-      <small *ngIf="studentForm?.get('phoneNumber')?.invalid && studentForm?.get('phoneNumber')?.touched" class="p-error">
         Number is required.
       </small>
     </div>
@@ -55,12 +74,43 @@
         [options]="classes"
         class="w-full"
       ></p-dropdown>
-      <small *ngIf="studentForm?.get('class')?.invalid && studentForm?.get('class')?.touched" class="p-error">
+      <small
+        *ngIf="
+          studentForm?.get('class')?.invalid &&
+          studentForm?.get('class')?.touched
+        "
+        class="p-error"
+      >
         Class is required.
       </small>
     </div>
+    <div class="field col-12">
+      <label for="img" class="block mb-2">Image:</label>
+      <input
+        id="img"
+        pInputText
+        type="file"
+        (change)="onFileChange($event)"
+        placeholder="Enter student Photo."
+        accept="image/*"
+        class="w-full"
+      />
+      <small
+        *ngIf="
+          studentForm?.get('img')?.invalid && studentForm?.get('img')?.touched
+        "
+        class="p-error"
+      >
+        img is required.
+      </small>
+    </div>
 
-    <p-button type="submit" label="Submit" [disabled]="studentForm?.invalid ?? true" class="mt-3"></p-button>
+    <p-button
+      type="submit"
+      label="Submit"
+      [disabled]="studentForm.invalid"
+      class="mt-3"
+    ></p-button>
   </form>
 
   <p-table
@@ -75,6 +125,7 @@
         <th>Roll</th>
         <th>Phone No.</th>
         <th>Class</th>
+        <th>pic</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-student>
@@ -83,8 +134,11 @@
         <td>{{ student.roll }}</td>
         <td>{{ student.phoneNumber }}</td>
         <td>{{ student.className }}</td>
+
+        <td>
+          <img [src]="student.img" alt="Student Image" style="height: 100px" />
+        </td>
       </tr>
     </ng-template>
   </p-table>
 </p-card>
-

@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Exotic-Wild-Market';
   studentForm: FormGroup; // No longer optional
   // enter some student data
+  maxFileSize = 200 * 1024; // 200 KB
 
   students: any[] = [];
   classes: any[] = [
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
       // create phone number pattern
       phoneNumber: ['', [Validators.required,Validators.maxLength(10),Validators.minLength(10),Validators.pattern('^[0-9]*$')]],
       className: ['', Validators.required],
+      img : ["", Validators.required]
     });
   }
 
@@ -47,10 +49,34 @@ export class AppComponent implements OnInit {
   }
   async showData(){
     const responce = await firstValueFrom(this.api.getStudent());
-    // console.log(responce);
+    console.log(responce);
     this.students=responce.data;
   }
-
+  convertToBase64(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  }
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      if (file.size <= this.maxFileSize) {
+        this.convertToBase64(file).then(base64 => {
+          this.studentForm.patchValue({ img: base64 });
+        }).catch(error => {
+          console.error('Error converting file to base64:', error);
+          this.msgService.showError('Error converting file to base64.');
+        });
+      } else {
+        this.msgService.showWarning('File size exceeds the limit of 200 KB');
+        this.studentForm.patchValue({ img: '' });
+      }
+    }
+  }
   async onSubmit(): Promise<void> {
     if (this.studentForm.valid) {
       const newStudent = this.studentForm.value;
