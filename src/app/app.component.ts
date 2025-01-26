@@ -10,7 +10,7 @@ import { Test1Service } from './service/apis/test1.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'Exotic-Wild-Market';
+  title = 'PawPalace';
   studentForm: FormGroup; // No longer optional
   // enter some student data
   maxFileSize = 200 * 1024; // 200 KB
