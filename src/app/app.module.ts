@@ -15,7 +15,6 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import {DialogModule} from 'primeng/dialog';
-import { NbThemeModule } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -37,6 +36,5 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         ConfirmDialogModule,
         ToastModule,
         DialogModule,
-        NbThemeModule.forRoot(),
         ReactiveFormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
