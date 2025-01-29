@@ -5,9 +5,10 @@ import { firstValueFrom } from 'rxjs';
 import { Test1Service } from './service/apis/test1.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit {
   title = 'PawPawsy';
@@ -76,6 +77,7 @@ export class AppComponent implements OnInit {
         this.studentForm.patchValue({ img: '' });
       }
     }
+
   }
   async onSubmit(): Promise<void> {
     if (this.studentForm.valid) {
