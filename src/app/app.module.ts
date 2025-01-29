@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -21,30 +21,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    InputTextModule,
-    ButtonModule,
-    CardModule,
-    TableModule,
-    DropdownModule,
-    InputNumberModule,
-    ConfirmDialogModule,
-    ToastModule,
-    DialogModule,
-    NbThemeModule.forRoot(),
-    ReactiveFormsModule
-
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        InputTextModule,
+        ButtonModule,
+        CardModule,
+        TableModule,
+        DropdownModule,
+        InputNumberModule,
+        ConfirmDialogModule,
+        ToastModule,
+        DialogModule,
+        NbThemeModule.forRoot(),
+        ReactiveFormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
